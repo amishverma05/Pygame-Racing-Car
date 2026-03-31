@@ -109,7 +109,7 @@ class Game:
 
             # if score is greater than 5000 then move
             # to a new level and increase the speed of enemy car
-            if self.score % 5000 == 0:
+            if self.score % 1500 == 0:
                 self.speed += 0.16
                 self.level += 1
                 print("Level Up!")
@@ -137,7 +137,8 @@ class Game:
             self.draw(self.event_updater_counter)
             self.display_score()
 
-            self.score += 1
+            self.update_score()
+
 
             self.CLOCK.tick(self.FPS)
             pygame.display.update()
@@ -424,6 +425,14 @@ class Game:
         self.car_lane = "R"
         self.car2_lane = "L"
         print("Restart!")
+
+    def update_score(self):
+        if self.score >= 1500:
+            i = self.score // 1500
+            additional_score = int(0.5 * i)
+            self.score += 1 + additional_score
+        else:
+            self.score += 1
 
     @staticmethod
     def quit_game():
