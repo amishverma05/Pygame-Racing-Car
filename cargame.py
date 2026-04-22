@@ -36,11 +36,13 @@ class Game:
             with open("high_scores.txt", "r") as hs_file:
                 high_scores = hs_file.read().strip()
             if high_scores:
-                self.max_score = max([int(i) for i in high_scores.split()])
+                self.max_score = max([int(float(i)) for i in high_scores.split()])
             else:
                 self.max_score = 0
         except FileNotFoundError:
             self.max_score = 0
+            with open("high_scores.txt", "w") as hs_file:
+                pass  # create an empty file
 
         self.CLOCK = pygame.time.Clock()
         self.event_updater_counter = 0  # for moving dashed line on the road
